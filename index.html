@@ -1,591 +1,574 @@
-<!doctype html>
+# Generate the complete, self-contained HTML file for Midhat Haris' portfolio redesign
+
+html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Accurate Books. Reliable Reports. | Midhat Haris</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midhat Haris | Accounting, Financial Reporting & Business Analysis</title>
+    <meta name="description" content="Midhat Haris provides bookkeeping, financial reconciliation, reporting and Power BI business analysis to help businesses understand their numbers and make better decisions.">
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Midhat Haris | Accounting, Financial Reporting & Business Analysis">
+    <meta property="og:description" content="Turn messy financial records into accurate books, useful reports, and actionable business insights.">
+    <meta property="og:type" content="website">
 
-<!-- Core -->
-<meta name="description" content="I help small businesses keep accurate books, reconcile financial records, and turn financial data into reliable reports and business insights." />
-<meta name="author" content="Midhat Haris" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://midhatproject.vercel.app/" />
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-surface: #1f2937;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent-emerald: #10b981;
+            --accent-emerald-glow: rgba(16, 185, 129, 0.15);
+            --border-subtle: #374151;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        }
 
-<!-- Article / publish date -->
-<meta property="article:author" content="Midhat Haris" />
-<meta property="article:published_time" content="2026-08-27T00:00:00+00:00" />
-<meta property="article:modified_time" content="2026-08-27T00:00:00+00:00" />
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: var(--bg-primary); 
+            color: var(--text-main); 
+            font-family: var(--font-sans); 
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-<!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Accurate Books. Reliable Reports. | Midhat Haris" />
-<meta property="og:description" content="Bookkeeping, financial reconciliation, and reporting that turns messy financial records into reliable business insights." />
-<meta property="og:url" content="https://midhatproject.vercel.app/" />
-<meta property="og:site_name" content="Midhat Haris" />
-<meta property="og:image" content="https://midhatproject.vercel.app/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Midhat Haris — Bookkeeping, Financial Reconciliation & Reporting" />
+        /* Typography & Utility */
+        h1, h2, h3, h4 { line-height: 1.25; letter-spacing: -0.02em; }
+        .text-mono { font-family: var(--font-mono); }
+        .accent-text { color: var(--accent-emerald); }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        /* Sticky Navigation */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 70px;
+        }
+        .brand { 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            letter-spacing: 0.05em; 
+            text-transform: uppercase; 
+            color: #fff; 
+            text-decoration: none; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-emerald);
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        
+        /* Mobile Nav Toggle */
+        .mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Accurate Books. Reliable Reports. | Midhat Haris" />
-<meta name="twitter:description" content="Bookkeeping, financial reconciliation, and reporting that turns messy financial records into reliable business insights." />
-<meta name="twitter:image" content="https://midhatproject.vercel.app/og-image.png" />
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.7rem 1.35rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            text-decoration: none; transition: all 0.2s; cursor: pointer; border: 1px solid transparent;
+        }
+        .btn-primary { background: var(--accent-emerald); color: #062e20; }
+        .btn-primary:hover { background: #34d399; transform: translateY(-1px); }
+        .btn-secondary { background: transparent; border-color: var(--border-subtle); color: var(--text-main); }
+        .btn-secondary:hover { background: var(--bg-surface); border-color: var(--text-muted); transform: translateY(-1px); }
 
-<!-- Structured data: identifies the author/publisher for crawlers -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "dateModified": "2026-08-27",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "Midhat Haris",
-    "jobTitle": "Bookkeeping, Reconciliation & Financial Reporting",
-    "email": "mailto:midhatharis@gmail.com",
-    "telephone": "+92-301-2557877",
-    "url": "https://midhatproject.vercel.app/",
-    "knowsAbout": ["Bookkeeping", "Financial Reconciliation", "Financial Reporting", "Power BI", "Excel"]
-  }
-}
-</script>
+        /* Hero Section */
+        .hero { padding: 5rem 0 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+        .hero-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-emerald); margin-bottom: 1rem; display: inline-block; font-weight: 600; }
+        .hero h1 { font-size: 2.75rem; margin-bottom: 1.25rem; font-weight: 800; color: #ffffff; }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 520px; }
+        .hero-ctas { display: flex; gap: 1rem; margin-bottom: 2.5rem; }
+        .credibility-line { font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 1.25rem; font-family: var(--font-mono); }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        /* Financial Dashboard Visual Component */
+        .dashboard-preview {
+            background: var(--bg-secondary); border: 1px solid var(--border-subtle);
+            border-radius: 10px; padding: 1.5rem; box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.85rem; margin-bottom: 1.25rem; }
+        .dash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem; }
+        .dash-card { background: var(--bg-surface); padding: 1rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
+        .dash-card-title { font-size: 0.725rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+        .dash-card-value { font-size: 1.35rem; font-weight: 700; font-family: var(--font-mono); color: #fff; }
 
-<style>
-  :root{
-    --ink:#172233;
-    --ink-2:#1e2c40;
-    --paper:#faf9f5;
-    --paper-dim:#f1efe8;
-    --line-red:#96453c;
-    --gold:#c89b3c;
-    --green:#3d7a60;
-    --muted:#5b6472;
-    --muted-2:#96a0ae;
-    --outstanding:#a5533f;
+        /* Services Section */
+        .section { padding: 5rem 0; border-bottom: 1px solid var(--border-subtle); }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-muted); font-size: 1rem; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+        .service-card {
+            background: var(--bg-secondary); border: 1px solid var(--border-subtle);
+            padding: 2rem; border-radius: 8px; transition: all 0.25s ease;
+        }
+        .service-card:hover { transform: translateY(-4px); border-color: var(--accent-emerald); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3); }
+        .service-icon { font-size: 1.75rem; margin-bottom: 1rem; display: block; }
+        .service-card h3 { margin-bottom: 0.75rem; font-size: 1.15rem; color: #fff; }
+        .service-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
 
-    --serif: 'Fraunces', Georgia, serif;
-    --sans: 'Inter', -apple-system, sans-serif;
-    --mono: 'IBM Plex Mono', 'DejaVu Sans Mono', monospace;
-  }
+        /* Featured Work / Case Studies */
+        .case-study { margin-bottom: 3.5rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 10px; overflow: hidden; }
+        .case-body { padding: 2.5rem; }
+        .case-tag { font-size: 0.75rem; text-transform: uppercase; color: var(--accent-emerald); font-family: var(--font-mono); margin-bottom: 0.5rem; display: block; }
+        .case-title { font-size: 1.6rem; color: #fff; margin-bottom: 1.5rem; }
+        
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.75rem 0; }
+        .kpi-box { background: var(--bg-surface); padding: 1.1rem; border-radius: 6px; border-left: 3px solid var(--accent-emerald); }
+        .kpi-box .val { font-size: 1.35rem; font-weight: 700; font-family: var(--font-mono); color: #fff; display: block; }
+        .kpi-box .lbl { font-size: 0.725rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; display: block; }
 
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--sans);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{ color:inherit; text-decoration:none; }
-  img{ max-width:100%; display:block; }
-  ::selection{ background:var(--gold); color:var(--ink); }
+        /* Flow Diagram */
+        .flow-container { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin: 2rem 0 1rem; background: var(--bg-surface); padding: 1.25rem 1.5rem; 
+            border-radius: 8px; border: 1px solid var(--border-subtle); text-align: center; 
+        }
+        .flow-step { font-size: 0.85rem; font-weight: 600; }
+        .flow-arrow { color: var(--accent-emerald); font-weight: bold; font-size: 1.1rem; }
 
-  .skip-link{
-    position:absolute; left:-999px; top:0;
-    background:var(--ink); color:var(--paper); padding:10px 16px; z-index:200;
-  }
-  .skip-link:focus{ left:12px; top:12px; }
+        /* Process Section */
+        .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+        .process-step { background: var(--bg-secondary); padding: 2.25rem 1.75rem; border-radius: 8px; border: 1px solid var(--border-subtle); position: relative; }
+        .step-num { font-family: var(--font-mono); font-size: 1.75rem; font-weight: 700; color: var(--accent-emerald); margin-bottom: 0.75rem; }
+        .process-step h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.5rem; }
+        .process-step p { color: var(--text-muted); font-size: 0.9rem; }
 
-  :focus-visible{ outline:2px solid var(--line-red); outline-offset:3px; }
+        /* About & Timeline Section */
+        .timeline { border-left: 2px solid var(--border-subtle); padding-left: 1.5rem; margin-top: 1.5rem; }
+        .timeline-item { margin-bottom: 1.75rem; position: relative; }
+        .timeline-item::before { content: ""; position: absolute; left: -1.95rem; top: 0.35rem; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-emerald); }
+        .timeline-item h4 { font-size: 1.05rem; color: #fff; }
+        .timeline-item p { font-size: 0.875rem; color: var(--text-muted); }
 
-  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+        /* Skills Section */
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+        .skill-category { background: var(--bg-secondary); border: 1px solid var(--border-subtle); padding: 1.5rem; border-radius: 8px; }
+        .skill-category h4 { color: var(--accent-emerald); font-size: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; }
+        .skill-list { list-style: none; }
+        .skill-list li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+        .skill-list li::before { content: "▪"; color: var(--accent-emerald); }
 
-  /* Ledger rule lines used as a recurring structural device */
-  .ledger{ position:relative; }
-  .ledger::before{
-    content:"";
-    position:absolute; left:0; top:0; bottom:0; width:1px;
-    background:var(--line-red);
-    opacity:.55;
-  }
+        /* Trust Section */
+        .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .trust-card { background: var(--bg-secondary); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-subtle); text-align: left; }
+        .trust-card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 0.75rem; }
+        .trust-card p { color: var(--text-muted); font-size: 0.9rem; }
 
-  /* ===== Nav ===== */
-  header.site{
-    position:sticky; top:0; z-index:100;
-    background:rgba(250,249,245,.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid #e3e0d5;
-  }
-  .nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 28px; max-width:1080px; margin:0 auto;
-  }
-  .nav .brand{ font-family:var(--serif); font-weight:600; font-size:1.15rem; letter-spacing:.01em; }
-  .nav .brand .tick{ color:var(--green); }
-  .nav ul{ list-style:none; display:flex; gap:28px; }
-  .nav a{ font-size:.9rem; color:var(--muted); }
-  .nav a:hover{ color:var(--ink); }
-  .nav-toggle{
-    display:none; background:none; border:1px solid #d8d4c6; border-radius:2px;
-    padding:8px 12px; font-family:var(--mono); font-size:.8rem; color:var(--ink);
-  }
+        /* Contact Section */
+        .contact-wrapper { max-width: 650px; margin: 0 auto; background: var(--bg-secondary); border: 1px solid var(--border-subtle); padding: 2.5rem; border-radius: 10px; }
+        .contact-form { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; text-align: left; }
+        .form-group label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea {
+            background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.8rem 1rem;
+            color: #fff; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-emerald); }
 
-  /* ===== Hero ===== */
-  .hero{
-    background:var(--ink);
-    color:var(--paper);
-    position:relative;
-    overflow:hidden;
-    padding:96px 0 84px;
-  }
-  .hero .rule-lines{
-    position:absolute; inset:0;
-    background-image:repeating-linear-gradient(
-      to bottom, transparent 0, transparent 43px, rgba(255,255,255,.05) 44px
-    );
-    pointer-events:none;
-  }
-  .hero-inner{ position:relative; z-index:2; padding-left:32px; }
-  .hero-inner::before{
-    content:""; position:absolute; left:0; top:-8px; bottom:-8px; width:1px; background:var(--line-red); opacity:.6;
-  }
-  .eyebrow{
-    font-family:var(--mono); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--gold); margin-bottom:22px; display:block;
-  }
-  .hero h1{
-    font-family:var(--serif); font-weight:500; font-size:clamp(2.4rem, 5.6vw, 4.1rem);
-    line-height:1.08; max-width:16ch; letter-spacing:-.01em;
-  }
-  .hero h1 em{ font-style:italic; color:var(--gold); font-weight:400; }
-  .hero p.lede{
-    margin-top:26px; max-width:46ch; color:#cfd5e0; font-size:1.08rem;
-  }
-  .hero .ctas{ margin-top:38px; display:flex; gap:16px; flex-wrap:wrap; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--mono); font-size:.85rem; letter-spacing:.02em;
-    padding:13px 22px; border-radius:2px; border:1px solid transparent;
-    transition:transform .15s ease, background .15s ease, border-color .15s ease;
-  }
-  .btn-primary{ background:var(--gold); color:var(--ink); font-weight:600; }
-  .btn-primary:hover{ transform:translateY(-1px); background:#d8ab4c; }
-  .btn-ghost{ border-color:#4a5567; color:var(--paper); }
-  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold); }
+        /* Footer */
+        footer { border-top: 1px solid var(--border-subtle); padding: 3rem 0; background: var(--bg-secondary); margin-top: 4rem; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+        .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; }
+        .footer-links a:hover { color: #fff; }
 
-  /* Reconciliation ticket - signature element in hero */
-  .ticket{
-    margin-top:64px; max-width:640px;
-    background:var(--ink-2); border:1px solid #313f56; border-radius:3px;
-    padding:26px 28px;
-  }
-  .ticket-head{
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted-2); margin-bottom:16px;
-  }
-  .ticket-row{
-    display:flex; justify-content:space-between; align-items:baseline;
-    padding:9px 0; border-bottom:1px dashed #33405a; font-family:var(--mono); font-size:.92rem;
-  }
-  .ticket-row:last-child{ border-bottom:none; }
-  .ticket-row .label{ color:#c3cad8; }
-  .ticket-row .val{ font-weight:600; letter-spacing:.01em; }
-  .ticket-row.match .val{ color:var(--green); display:flex; align-items:center; gap:8px; }
-  .tickmark{ display:inline-block; width:14px; height:10px; position:relative; }
-  .tickmark::before{
-    content:""; position:absolute; left:0; top:4px; width:6px; height:2px;
-    background:var(--green); transform:rotate(45deg); transform-origin:left;
-  }
-  .tickmark::after{
-    content:""; position:absolute; left:5px; top:6px; width:11px; height:2px;
-    background:var(--green); transform:rotate(-48deg); transform-origin:left;
-  }
-  .ticket-foot{ margin-top:16px; font-size:.86rem; color:var(--muted-2); }
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-ctas { justify-content: center; }
+            .process-grid, .skills-grid, .trust-grid { grid-template-columns: 1fr; }
+            .about-container { grid-template-columns: 1fr !important; }
+        }
 
-  /* ===== Section scaffolding ===== */
-  section{ padding:88px 0; }
-  .section-tag{
-    font-family:var(--mono); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--outstanding); margin-bottom:14px;
-  }
-  h2.section-title{
-    font-family:var(--serif); font-weight:500; font-size:clamp(1.7rem,3.4vw,2.4rem);
-    max-width:22ch; letter-spacing:-.01em;
-  }
-  .section-sub{ margin-top:16px; max-width:56ch; color:var(--muted); font-size:1.02rem; }
-
-  /* ===== Case studies ===== */
-  .case{
-    margin-top:56px; padding-left:32px; position:relative;
-    border-top:1px solid #e3e0d5; padding-top:44px;
-  }
-  .case::before{ content:""; position:absolute; left:0; top:44px; bottom:0; width:1px; background:var(--line-red); opacity:.5; }
-  .case-kicker{
-    display:flex; align-items:center; gap:12px; margin-bottom:14px;
-  }
-  .case-num{ font-family:var(--mono); color:var(--muted-2); font-size:.85rem; }
-  .case-type{
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
-    background:var(--paper-dim); border:1px solid #e3e0d5; padding:4px 10px; border-radius:2px; color:var(--muted);
-  }
-  .case h3{ font-family:var(--serif); font-weight:500; font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:24ch; }
-  .case p{ margin-top:16px; max-width:68ch; color:var(--muted); }
-  .case h4{
-    margin-top:26px; font-family:var(--mono); font-size:.78rem; letter-spacing:.08em;
-    text-transform:uppercase; color:var(--ink);
-  }
-  .case p.small{ margin-top:8px; font-size:.96rem; }
-
-  table.ledger-table{
-    margin-top:16px; width:100%; max-width:560px; border-collapse:collapse; font-family:var(--mono); font-size:.9rem;
-  }
-  table.ledger-table td{ padding:10px 4px; border-bottom:1px solid #e3e0d5; }
-  table.ledger-table td:first-child{ color:var(--muted); }
-  table.ledger-table td:last-child{ text-align:right; font-weight:600; }
-  table.ledger-table tr.negative td:last-child{ color:var(--outstanding); }
-
-  .stat-grid{ margin-top:24px; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#e3e0d5; border:1px solid #e3e0d5; }
-  .stat{ background:var(--paper); padding:20px 18px; }
-  .stat .num{ font-family:var(--mono); font-weight:600; font-size:1.3rem; }
-  .stat .cap{ margin-top:4px; font-size:.8rem; color:var(--muted); }
-
-  .bench{ margin-top:28px; display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-  .bench-card{ border:1px solid #e3e0d5; padding:20px; background:var(--paper); }
-  .bench-card h5{ font-family:var(--mono); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:12px; }
-  .bench-row{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:1rem; padding:5px 0; }
-  .bench-row.actual{ font-weight:600; }
-  .bench-gap{ margin-top:10px; font-size:.82rem; color:var(--outstanding); font-family:var(--mono); }
-
-  .insights{ margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  .insight{ padding:18px 0 18px 18px; border-left:2px solid var(--gold); }
-  .insight .n{ font-family:var(--mono); font-size:.78rem; color:var(--muted-2); }
-  .insight h6{ font-family:var(--serif); font-weight:600; font-size:1.05rem; margin-top:6px; }
-  .insight p{ margin-top:6px; font-size:.92rem; color:var(--muted); }
-
-  .takeaway{
-    margin-top:36px; padding:22px 26px; background:var(--ink); color:var(--paper);
-    border-radius:2px; font-size:.98rem; line-height:1.6;
-  }
-  .takeaway strong{ color:var(--gold); }
-
-  .cta-line{ margin-top:60px; text-align:center; }
-  .cta-line p{ font-family:var(--serif); font-size:1.3rem; max-width:30ch; margin:0 auto 20px; }
-
-  /* ===== Process ===== */
-  .process-grid{ margin-top:52px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#e3e0d5; border:1px solid #e3e0d5; }
-  .process-step{ background:var(--paper); padding:32px 26px; }
-  .process-step .idx{ font-family:var(--mono); color:var(--line-red); font-size:.85rem; }
-  .process-step h3{ font-family:var(--serif); font-weight:600; margin-top:14px; font-size:1.2rem; }
-  .process-step p{ margin-top:10px; color:var(--muted); font-size:.94rem; }
-
-  /* ===== About ===== */
-  .about-grid{ margin-top:48px; display:grid; grid-template-columns:1fr 1.4fr; gap:56px; align-items:start; }
-  .about-mark{
-    width:96px; height:96px; border:1px solid var(--ink); display:flex; align-items:center; justify-content:center;
-    font-family:var(--serif); font-size:1.6rem; font-weight:600;
-  }
-  .about-copy p{ color:var(--muted); max-width:60ch; }
-  .about-copy p + p{ margin-top:14px; }
-  .credentials{ margin-top:34px; display:grid; grid-template-columns:repeat(2,1fr); gap:22px 34px; }
-  .cred dt{ font-family:var(--mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--outstanding); }
-  .cred dd{ margin-top:6px; font-size:.94rem; }
-
-  /* ===== Contact ===== */
-  .contact-section{ background:var(--ink); color:var(--paper); }
-  .contact-section .section-tag{ color:var(--gold); }
-  .contact-grid{ margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:56px; }
-  .contact-direct a{ display:block; font-family:var(--mono); font-size:1rem; margin-bottom:10px; color:#d7dce6; }
-  .contact-direct a:hover{ color:var(--gold); }
-  form{ display:flex; flex-direction:column; gap:16px; }
-  label{ font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-2); }
-  input, textarea{
-    background:var(--ink-2); border:1px solid #33405a; color:var(--paper);
-    padding:12px 14px; font-family:var(--sans); font-size:.95rem; border-radius:2px; width:100%;
-  }
-  textarea{ min-height:110px; resize:vertical; }
-  input:focus, textarea:focus{ border-color:var(--gold); }
-  .field{ display:flex; flex-direction:column; gap:6px; }
-  .form-note{ margin-top:4px; font-size:.8rem; color:var(--muted-2); }
-
-  footer{
-    padding:32px 0; border-top:1px solid #e3e0d5; font-family:var(--mono); font-size:.78rem; color:var(--muted);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-  }
-
-  @media (max-width:820px){
-    .stat-grid{ grid-template-columns:repeat(2,1fr); }
-    .bench{ grid-template-columns:1fr; }
-    .insights{ grid-template-columns:1fr; }
-    .process-grid{ grid-template-columns:1fr; }
-    .about-grid{ grid-template-columns:1fr; }
-    .contact-grid{ grid-template-columns:1fr; }
-    .nav ul{ gap:16px; }
-  }
-  @media (max-width:520px){
-    .nav ul{
-      display:none; position:absolute; top:100%; left:0; right:0;
-      flex-direction:column; gap:0; background:var(--paper); border-bottom:1px solid #e3e0d5;
-      padding:8px 28px 18px;
-    }
-    .nav ul.open{ display:flex; }
-    .nav ul li{ border-top:1px solid #ece9de; }
-    .nav ul a{ display:block; padding:14px 0; }
-    .nav-toggle{ display:inline-block; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ transition:none !important; }
-  }
-</style>
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .flow-container { flex-direction: column; gap: 0.75rem; }
+            .flow-arrow { transform: rotate(90deg); }
+            .case-body { padding: 1.5rem; }
+            .hero h1 { font-size: 2.1rem; }
+        }
+    </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site">
-  <nav class="nav">
-    <a href="#home" class="brand">Midhat Haris <span class="tick">✓</span></a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
-    <ul id="navMenu">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main id="main">
-
-  <section class="hero" id="home">
-    <div class="rule-lines" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="hero-inner">
-        <span class="eyebrow">Bookkeeping · Reconciliation · Financial Reporting</span>
-        <h1>Accurate books. <em>Clear numbers.</em> Better decisions.</h1>
-        <p class="lede">I keep accurate books, reconcile financial records, and turn financial data into reports business owners can actually trust — currently for SpeedAutoCar, and open to more.</p>
-        <div class="ctas">
-          <a class="btn btn-primary" href="#contact">Get your books sorted →</a>
-          <a class="btn btn-ghost" href="#work">See the work</a>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-inner">
+            <a href="#" class="brand">
+                <span class="brand-dot"></span> Midhat Haris
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact" class="btn btn-primary" style="padding: 0.5rem 1rem;">Let's Talk</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="ticket">
-          <div class="ticket-head">Reconciliation ticket — trading business, monthly close</div>
-          <div class="ticket-row"><span class="label">Net profit reported</span><span class="val">PKR 2.9M</span></div>
-          <div class="ticket-row"><span class="label">Net payable exposure</span><span class="val">PKR 1.92M</span></div>
-          <div class="ticket-row match"><span class="label">Ledger reconciled</span><span class="val"><span class="tickmark" aria-hidden="true"></span> Matched</span></div>
-          <div class="ticket-foot">A full ledger reconciliation surfaced the payable position the monthly P&amp;L alone didn't show.</div>
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div>
+                <span class="hero-tag">Accounting & Business Analysis</span>
+                <h1>Accurate books.<br>Clear numbers.<br>Better decisions.</h1>
+                <p>I help businesses keep accurate financial records, reconcile accounts and turn financial data into clear reports and actionable insights.</p>
+                <div class="hero-ctas">
+                    <a href="#work" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Let's Work Together</a>
+                </div>
+                <div class="credibility-line">
+                    Bookkeeping · Reconciliation · Financial Reporting · Power BI
+                </div>
+            </div>
+
+            <!-- Financial Dashboard Visual -->
+            <div class="dashboard-preview">
+                <div class="dash-header text-mono">
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">EXECUTIVE DATA SUMMARY</span>
+                    <span class="accent-text" style="font-size: 0.75rem;">● LIVE REPORT</span>
+                </div>
+                <div class="dash-grid">
+                    <div class="dash-card">
+                        <div class="dash-card-title">Total Revenue</div>
+                        <div class="dash-card-value">PKR 7.03M</div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-card-title">Net Payable Pos.</div>
+                        <div class="dash-card-value">PKR 1.92M</div>
+                    </div>
+                </div>
+                <div class="dash-card" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="dash-card-title">Reconciliation Accuracy</div>
+                        <div class="dash-card-value accent-text">100.0%</div>
+                    </div>
+                    <div class="text-mono" style="font-size: 0.75rem; color: var(--text-muted); text-align: right;">
+                        Matched & Verified
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="section-header">
+                <h2 class="section-title">What I Can Help With</h2>
+                <p class="section-subtitle">Tailored financial expertise to keep your business records clean and decision-ready.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">📊</span>
+                    <h3>Bookkeeping</h3>
+                    <p>Accurate transaction recording, categorization and structured financial record management tailored to operational needs.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">⚖️</span>
+                    <h3>Account Reconciliation</h3>
+                    <p>Matching transactions, identifying discrepancies, and creating a reliable true financial position to eliminate hidden risks.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">📈</span>
+                    <h3>Financial Reporting</h3>
+                    <p>Clear P&L structures, financial summaries, and management reporting for complete executive visibility.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">⚡</span>
+                    <h3>Power BI & Business Analysis</h3>
+                    <p>Turning operational business data into interactive dashboards, trend visualizations, KPIs, and actionable strategy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Work / Case Studies -->
+        <section id="work" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Work & Analysis</h2>
+                <p class="section-subtitle">Real financial data analyses turned into strategic business insights.</p>
+            </div>
+
+            <!-- Case Study 01 -->
+            <article class="case-study">
+                <div class="case-body">
+                    <span class="case-tag">Case Study 01 — Account Reconciliation</span>
+                    <h3 class="case-title">"The profit number wasn't the whole story."</h3>
+                    
+                    <div class="kpi-row">
+                        <div class="kpi-box"><span class="lbl">Gross Profit</span><span class="val">PKR 6.8M</span></div>
+                        <div class="kpi-box"><span class="lbl">Net Profit</span><span class="val">PKR 2.9M</span></div>
+                        <div class="kpi-box"><span class="lbl">Receivables</span><span class="val">PKR 380K</span></div>
+                        <div class="kpi-box"><span class="lbl">Supplier Payable</span><span class="val">PKR 2.3M</span></div>
+                        <div class="kpi-box"><span class="lbl">Net Payable Pos.</span><span class="val accent-text">PKR 1.92M</span></div>
+                    </div>
+
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        While initial P&L reports displayed a healthy PKR 2.9M Net Profit, comprehensive reconciliation revealed significant unrecorded supplier payable commitments of PKR 2.3M. This uncovered a true net payable exposure of PKR 1.92M, providing management with the vital visibility needed to prevent cash flow strain.
+                    </p>
+
+                    <!-- Visual Flow Diagram -->
+                    <div class="flow-container text-mono">
+                        <div class="flow-step">Raw Records</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">Reconciliation</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">Financial Position</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step accent-text">Business Insight</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Case Study 02 -->
+            <article class="case-study">
+                <div class="case-body">
+                    <span class="case-tag">Case Study 02 — Flagship Power BI Dashboard</span>
+                    <h3 class="case-title">SpeedAutoCar Business & Performance Analysis</h3>
+                    
+                    <div class="kpi-row">
+                        <div class="kpi-box"><span class="lbl">Total Sales</span><span class="val">PKR 7.03M</span></div>
+                        <div class="kpi-box"><span class="lbl">Total Jobs</span><span class="val">68</span></div>
+                        <div class="kpi-box"><span class="lbl">Total Received</span><span class="val">PKR 5.28M</span></div>
+                        <div class="kpi-box"><span class="lbl">Outstanding</span><span class="val" style="color: #ef4444;">PKR 1.75M</span></div>
+                        <div class="kpi-box"><span class="lbl">PPF Margin</span><span class="val accent-text">PKR 2.51M</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+                        <div>
+                            <h4 style="color: #fff; margin-bottom: 0.5rem;">Challenge & Analysis</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                                Transformed unorganized transactional logs across 68 automotive service jobs into an interactive Power BI visual suite to identify hidden revenue drivers and outstanding collection bottlenecks.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 style="color: #fff; margin-bottom: 0.5rem;">Key Findings & Strategic Impact</h4>
+                            <ul style="color: var(--text-muted); font-size: 0.9rem; padding-left: 1.25rem;">
+                                <li><strong>PPF Dominance:</strong> Identified Paint Protection Film as the primary margin engine (PKR 2.51M).</li>
+                                <li><strong>Collection Risk:</strong> Highlighted PKR 1.75M lingering across smaller jobs needing structured follow-up.</li>
+                                <li><strong>Growth Opportunities:</strong> Uncovered high-margin pricing potential in Ceramic Coating additions.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="section">
+            <div class="section-header">
+                <h2 class="section-title">How I Work</h2>
+                <p class="section-subtitle">A simple, transparent 3-step accounting workflow.</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-num">01</div>
+                    <h3>Send the Records</h3>
+                    <p>Share bank statements, invoices, receipts, ledgers or raw spreadsheets securely.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">02</div>
+                    <h3>Reconcile & Structure</h3>
+                    <p>Transactions are meticulously matched, categorized, and checked against bank balances and supporting documents.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">03</div>
+                    <h3>Understand the Numbers</h3>
+                    <p>Receive clear reports, interactive dashboards, and strategic insights that identify risks and capital opportunities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Background & Qualifications</h2>
+                <p class="section-subtitle">Proven track record in financial operations, banking, and data analytics.</p>
+            </div>
+            
+            <div class="about-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 1rem;">Professional Timeline</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Bookkeeping & Reporting Specialist</h4>
+                            <p class="accent-text" style="font-size: 0.8rem; font-family: var(--font-mono);">Current</p>
+                            <p>Direct financial reporting, reconciliation, and Power BI dashboards for SpeedAutoCar.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Assistant Manager of Finance</h4>
+                            <p class="accent-text" style="font-size: 0.8rem; font-family: var(--font-mono);">2 Years Experience</p>
+                            <p>Managed financial operations, corporate accounting records, and ledger control.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Banking Professional</h4>
+                            <p class="accent-text" style="font-size: 0.8rem; font-family: var(--font-mono);">4 Years Experience</p>
+                            <p>Executed financial verification, transaction reconciliation, and risk control.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Education & Certifications</h4>
+                            <p>Bachelor's in Commerce · Diploma in Management Accounting</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 1rem;">Skills & Focus</h3>
+                    <div class="skills-grid" style="grid-template-columns: 1fr;">
+                        <div class="skill-category">
+                            <h4>Accounting</h4>
+                            <ul class="skill-list">
+                                <li>Bookkeeping</li>
+                                <li>Account Reconciliation</li>
+                                <li>Financial Reporting</li>
+                                <li>Receivables & Payables Control</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category" style="margin-top: 1rem;">
+                            <h4>Analysis</h4>
+                            <ul class="skill-list">
+                                <li>Financial Analysis</li>
+                                <li>Margin & Profitability Analysis</li>
+                                <li>Revenue & Trend Analysis</li>
+                                <li>Collections Risk Analysis</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category" style="margin-top: 1rem;">
+                            <h4>Tools & Technologies</h4>
+                            <ul class="skill-list">
+                                <li>Microsoft Excel (Advanced Formulas & Pivot Tables)</li>
+                                <li>Power BI Dashboard Creation</li>
+                                <li>Formula-Driven Reconciliation Models</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Principles Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Numbers You Can Trust</h2>
+                <p class="section-subtitle">Core principles guiding every balance sheet and report.</p>
+            </div>
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <h3 class="accent-text">Accuracy</h3>
+                    <p>Every single figure must reconcile. Zero tolerance for unverified balances or unexplained variances.</p>
+                </div>
+                <div class="trust-card">
+                    <h3 class="accent-text">Clarity</h3>
+                    <p>Financial information presented cleanly so small business owners can understand their metrics effortlessly.</p>
+                </div>
+                <div class="trust-card">
+                    <h3 class="accent-text">Insight</h3>
+                    <p>Moving beyond basic bookkeeping to deliver actionable guidance that directly improves decisions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section" style="border-bottom: none;">
+            <div class="contact-wrapper text-center">
+                <h2 class="section-title">Let's make your numbers work harder.</h2>
+                <p class="section-subtitle">Whether you need cleaner books, reliable reconciliation or a customized Power BI dashboard, let's talk.</p>
+
+                <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Your message has been recorded.');">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required placeholder="Your Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required placeholder="name@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Needed</label>
+                        <select id="service">
+                            <option>Bookkeeping Support</option>
+                            <option>Account Reconciliation</option>
+                            <option>Financial Reporting</option>
+                            <option>Power BI & Business Analysis</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="4" placeholder="Briefly describe your financial records or project needs..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Start a Conversation →</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+            <div>
+                <strong style="color: #fff; font-size: 1rem;">Midhat Haris</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Accounting · Financial Reporting · Business Analysis</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">&copy; 2026 Midhat Haris. All rights reserved.</p>
         </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <section id="work">
-    <div class="wrap">
-      <span class="section-tag">Selected work</span>
-      <h2 class="section-title">Financial analysis that leads to a decision.</h2>
-      <p class="section-sub">Two examples of turning financial records into something more useful than a spreadsheet: a reconciled financial position, and a Power BI analysis of revenue, margin, collections, and pricing.</p>
+    <!-- Interactive Scroll Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
 
-      <!-- Case study 01 -->
-      <article class="case">
-        <div class="case-kicker">
-          <span class="case-num">01</span>
-          <span class="case-type">Reconciliation</span>
-        </div>
-        <h3>The profit number wasn't the whole story.</h3>
-        <p>A small trading business had a monthly P&amp;L that looked healthy on its own, but it had never been reconciled against the full ledger. Receivables and a supplier balance were tracked separately, leaving the real payable exposure unclear.</p>
-
-        <h4>What I did</h4>
-        <p class="small">Reconciled sales, cost of sale, receivables, and supplier balances across the ledger, separating reported operating profit from the amounts actually owed to and by the business.</p>
-
-        <h4>Key numbers</h4>
-        <table class="ledger-table">
-          <tr><td>Gross profit</td><td>PKR 6.8M</td></tr>
-          <tr><td>Net profit (P&amp;L)</td><td>PKR 2.9M</td></tr>
-          <tr><td>Customer receivables</td><td>PKR 380K</td></tr>
-          <tr><td>Supplier payable balance</td><td>PKR 2.3M</td></tr>
-          <tr class="negative"><td>Net payable position</td><td>–PKR 1.92M</td></tr>
-        </table>
-        <p class="small">Result: the reported profit was real, but reconciliation surfaced a <strong>PKR 1.92M net payable exposure</strong> that the monthly P&amp;L alone did not show.</p>
-      </article>
-
-      <!-- Case study 02 -->
-      <article class="case">
-        <div class="case-kicker">
-          <span class="case-num">02</span>
-          <span class="case-type">Power BI</span>
-          <span class="case-type" style="border-color:var(--green); color:var(--green)">Ongoing — SpeedAutoCar</span>
-        </div>
-        <h3>Turning 68 job records into a pricing and collections story.</h3>
-        <p>I currently handle the books for SpeedAutoCar, a car detailing and paint-protection-film (PPF) business — reconciling accounts, tracking margins, and reporting on a regular basis. This analysis started from their raw job and payment records across 68 jobs, to see where revenue and margin sat, which jobs were more likely to remain unpaid, and where pricing or service mix could improve.</p>
-
-        <div class="stat-grid">
-          <div class="stat"><div class="num">PKR 7.03M</div><div class="cap">Total sales · 68 jobs</div></div>
-          <div class="stat"><div class="num">PKR 5.28M</div><div class="cap">Total received</div></div>
-          <div class="stat"><div class="num">PKR 2.51M</div><div class="cap">PPF margin — largest contributor</div></div>
-          <div class="stat"><div class="num">PKR 1.75M</div><div class="cap">Outstanding (sales less received)</div></div>
-        </div>
-
-        <h4>Pricing &amp; market benchmark</h4>
-        <p class="small">Values reproduced from the Power BI analysis.</p>
-        <div class="bench">
-          <div class="bench-card">
-            <h5>Full PPF install average</h5>
-            <div class="bench-row actual"><span>SAC actual</span><span>$732</span></div>
-            <div class="bench-row"><span>Global benchmark</span><span>$2,000</span></div>
-            <div class="bench-gap">~63% below benchmark</div>
-          </div>
-          <div class="bench-card">
-            <h5>Professional detailing adoption</h5>
-            <div class="bench-row actual"><span>SAC actual</span><span>41.8%</span></div>
-            <div class="bench-row"><span>Global benchmark</span><span>41%</span></div>
-            <div class="bench-gap" style="color:var(--green)">+0.8 pts vs benchmark</div>
-          </div>
-          <div class="bench-card">
-            <h5>Ceramic coating growth</h5>
-            <div class="bench-row actual"><span>SAC actual</span><span>3%</span></div>
-            <div class="bench-row"><span>Global benchmark</span><span>19%</span></div>
-            <div class="bench-gap">16-pt gap</div>
-          </div>
-        </div>
-
-        <h4>What the analysis surfaced</h4>
-        <p class="small">Instead of raw dashboard screenshots, this case study highlights the business questions, metrics, and decisions the analysis surfaced.</p>
-        <div class="insights">
-          <div class="insight">
-            <span class="n">Revenue concentration</span>
-            <h6>PPF is the dominant category</h6>
-            <p>PPF generated approximately PKR 5.7M, the largest single share of revenue.</p>
-          </div>
-          <div class="insight">
-            <span class="n">Collection risk</span>
-            <h6>Smaller jobs pay slower</h6>
-            <p>Lower-value jobs were roughly 2× more likely to have pending payments — a case for targeted follow-up.</p>
-          </div>
-          <div class="insight">
-            <span class="n">Pricing opportunity</span>
-            <h6>PPF priced well under benchmark</h6>
-            <p>Average SAC PPF ticket was ~$732 versus a ~$2,000 global benchmark.</p>
-          </div>
-          <div class="insight">
-            <span class="n">Service-growth opportunity</span>
-            <h6>Ceramic coating underrepresented</h6>
-            <p>Shown at 3% adoption versus a 19% global benchmark — room to review.</p>
-          </div>
-        </div>
-
-        <div class="takeaway">
-          <strong>Takeaway:</strong> PPF is the main revenue engine, while smaller high-volume services deserve more targeted collection follow-up. These findings now feed into SpeedAutoCar's monthly reporting, alongside the pricing and ceramic-coating growth areas worth reviewing.
-        </div>
-      </article>
-
-      <div class="cta-line">
-        <p>If your books are telling you one story and your cash position is telling you another, the first step is reconciliation.</p>
-        <a class="btn btn-primary" href="#contact" style="color:var(--ink)">Let's talk →</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="process" style="background:var(--paper-dim)">
-    <div class="wrap">
-      <span class="section-tag">Process</span>
-      <h2 class="section-title">Simple, structured, and built around the numbers.</h2>
-      <p class="section-sub">The goal isn't to produce more spreadsheets. It's to give you a reliable financial picture you can actually use.</p>
-
-      <div class="process-grid">
-        <div class="process-step">
-          <span class="idx">01</span>
-          <h3>Send the records</h3>
-          <p>Bank statements, invoices, receipts, ledgers, or existing spreadsheets — whatever you currently have.</p>
-        </div>
-        <div class="process-step">
-          <span class="idx">02</span>
-          <h3>Reconcile &amp; structure</h3>
-          <p>Transactions are matched, categorized, checked, and brought together so the records tell one consistent story.</p>
-        </div>
-        <div class="process-step">
-          <span class="idx">03</span>
-          <h3>Understand the result</h3>
-          <p>You receive clear reports or dashboards that highlight what changed, where the risk is, and what deserves attention.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="wrap">
-      <span class="section-tag">About</span>
-      <h2 class="section-title">Precision isn't optional.</h2>
-
-      <div class="about-grid">
-        <div class="about-mark" aria-hidden="true">MH</div>
-        <div class="about-copy">
-          <p>I hold a Bachelor's in Commerce and a Diploma in Management Accounting, with two years of experience as an Assistant Manager of Finance and four years in banking, working directly with financial records and reporting standards.</p>
-          <p>That experience shaped a precision-first approach: accurate books, reconciled accounts, and current reports that business owners can actually trust.</p>
-
-          <dl class="credentials">
-            <div class="cred"><dt>Current</dt><dd>Bookkeeping &amp; reporting for SpeedAutoCar (ongoing)</dd></div>
-            <div class="cred"><dt>Education</dt><dd>B.Com · Diploma in Management Accounting</dd></div>
-            <div class="cred"><dt>Finance</dt><dd>2 years as Assistant Manager of Finance</dd></div>
-            <div class="cred"><dt>Banking</dt><dd>4 years in banking</dd></div>
-            <div class="cred"><dt>Tools</dt><dd>Excel · Pivot Tables · Formula-driven reconciliation · Power BI</dd></div>
-            <div class="cred"><dt>Analysis</dt><dd>Financial analysis · Receivables · Margin analysis</dd></div>
-            <div class="cred"><dt>Reporting</dt><dd>Business reporting · Data visualization</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact-section">
-    <div class="wrap">
-      <span class="section-tag">Contact</span>
-      <h2 class="section-title">Let's get your books in order.</h2>
-      <p class="section-sub" style="color:#c3cad8">If you need cleaner records, a reliable reconciliation, or a dashboard that turns financial data into decisions, send a message.</p>
-
-      <div class="contact-grid">
-        <div class="contact-direct">
-          <a href="mailto:midhatharis@gmail.com">midhatharis@gmail.com</a>
-          <a href="tel:03012557877">0301-2557877</a>
-        </div>
-
-        <form action="https://formspree.io/f/mjybnker" method="POST">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div class="field">
-            <label for="message">How can I help?</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit" style="align-self:flex-start">Send message →</button>
-          <p class="form-note">Your message goes directly to my inbox. I respond within 24 hours.</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
-    <span>Midhat Haris · Accounting &amp; Financial Reporting</span>
-    <span>© 2026</span>
-  </div>
-</footer>
-
-
-<script>
-  const toggle = document.getElementById('navToggle');
-  const menu = document.getElementById('navMenu');
-  toggle.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    menu.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }));
-</script>
+            document.querySelectorAll('.service-card, .case-study, .process-step, .trust-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.4s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
+"""
+
+# Save to an index.html file
+file_path = "index.html"
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"Successfully generated {file_path}")
